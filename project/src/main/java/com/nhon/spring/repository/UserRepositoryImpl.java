@@ -39,7 +39,7 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	public void register(User user) {
 		int randomId = (int)(Math.random() * 10000);
-		users.put(3, user);
+		users.put(randomId, user);
 	
 	}
 
