@@ -8,7 +8,7 @@
 <%@ page isELIgnored="false" %>
 <body>
     <h1>Products</h1>
-    <p><a href="/new">Add new product</a></p>
+    <p><a href="new">Add new product</a></p>
     <p>There are ${products.size()} products in this list.</p>
     <table border="1">
         <tr>

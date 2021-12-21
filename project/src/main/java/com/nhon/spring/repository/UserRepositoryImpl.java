@@ -12,7 +12,7 @@ public class UserRepositoryImpl implements UserRepository {
 	static {
 		users = new HashMap<Integer, User>();
 		users.put(1, new User("admin","123456"));
-		users.put(2, new User("staff","123456"));
+		users.put(2, new User("staff","12345"));
 	}
 	public User findUserById(int id) {
 		User user = users.get(id);
@@ -24,10 +24,9 @@ public class UserRepositoryImpl implements UserRepository {
 	public boolean checkLogin(User user) {
 		boolean isUser = false;
 		for (User u : findAll()) {
-			if(!u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
+			if(u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
 				isUser = true;
-			}else {
-				isUser = false;
+				break;
 			}
 		}
 		return isUser;
@@ -38,8 +37,8 @@ public class UserRepositoryImpl implements UserRepository {
 		return new ArrayList<User>(users.values());
 	}
 	public void register(User user) {
-		int randomId = (int)(Math.random() * 10000);
-		users.put(randomId, user);
+		int id = findAll().size();
+		users.put(id + 1, user);
 	
 	}
 

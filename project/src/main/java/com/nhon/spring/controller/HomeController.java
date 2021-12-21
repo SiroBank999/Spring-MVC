@@ -19,7 +19,7 @@ public class HomeController {
 	@Autowired
 	public UserService userService;
 	
-	@GetMapping("/login")
+	@GetMapping({"/","/login"})
 	public ModelAndView loginView() {
 		ModelAndView modelAndView = new ModelAndView("home/login");
 		modelAndView.addObject("user", new User());
@@ -51,7 +51,7 @@ public class HomeController {
 			modelAndView.addObject("message", "Vui lòng không để trống");
 			
 		}else {
-			if(user.getPassword().endsWith(repassword)) {
+			if(user.getPassword().equals(repassword)) {
 				userService.register(user);
 				modelAndView.addObject("message", "Đăng kí thành công");
 			}else {
