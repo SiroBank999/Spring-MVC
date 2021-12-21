@@ -7,7 +7,7 @@
 <%@ page isELIgnored="false" %>
 <body>
     <h1>Product details</h1>
-    <a href="/products">Back to product list</a>
+    <a href="products">Back to product list</a>
     <table>
         <tr>
             <td>Code: </td>

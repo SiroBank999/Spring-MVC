@@ -14,7 +14,7 @@
 <%@ page isELIgnored="false" %>
 <body>
     <h1>Create new Product</h1>
-    <a href="/products">Back to product list</a>
+    <a href="products">Back to product list</a>
     <p>
       <c:if test="${message != null}">
           <span class="message">${message}</span>

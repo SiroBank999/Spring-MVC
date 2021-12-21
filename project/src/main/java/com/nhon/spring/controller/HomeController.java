@@ -47,7 +47,7 @@ public class HomeController {
 		
 		ModelAndView modelAndView = new ModelAndView("home/register");
 		modelAndView.addObject("user", new User());
-		if(user.getUsername() == "" || user.getPassword() == "" || repassword == "") {
+		if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || repassword.isEmpty()) {
 			modelAndView.addObject("message", "Vui lòng không để trống");
 			
 		}else {
