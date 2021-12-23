@@ -14,6 +14,7 @@ import com.nhon.spring.models.Product;
 import com.nhon.spring.service.ProductService;
 
 
+
 @Controller
 public class ProductController {
 
@@ -37,11 +38,7 @@ public class ProductController {
 
     @PostMapping("/new")
     public ModelAndView createProduct(@ModelAttribute("product") Product product){
-        int randomId = (int)(Math.random() * 10000);
-        product.setId(randomId);//For demo purpose only
-
         this.productService.save(product);
-
         ModelAndView modelAndView = new ModelAndView("product/create");
         modelAndView.addObject("product", new Product());
         modelAndView.addObject("message", "New product was created");
@@ -54,5 +51,21 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("product/view");
         modelAndView.addObject("product", product);
         return modelAndView;
+    }
+    @GetMapping("/update")
+    public ModelAndView showUpdateForm(@RequestParam("id") Integer productId){
+        ModelAndView modelAndView = new ModelAndView("product/update");
+        modelAndView.addObject("product", this.productService.findById(productId));
+        return modelAndView;
+    }
+    @PostMapping("/update")
+    public ModelAndView update(@ModelAttribute Product product){
+    	this.productService.update(product);
+    	return new ModelAndView("redirect:products");
+    }
+    @GetMapping(value = "/remove")
+    public ModelAndView remove(@RequestParam("id") Integer productId){
+    	this.productService.removeById(productId);
+    	return new ModelAndView("redirect:products");
     }
 }

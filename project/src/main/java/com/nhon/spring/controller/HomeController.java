@@ -1,8 +1,12 @@
 package com.nhon.spring.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +30,19 @@ public class HomeController {
 		return modelAndView;
 	}
 	@PostMapping("/login")
-	public ModelAndView submitLogin(@ModelAttribute("user") User user) {
+	public ModelAndView submitLogin(@Valid @ModelAttribute("user") User user,BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/products");
-		if(userService.checkLogin(user) == true) {
-			return modelAndView;
-		}else {
+		if (result.hasErrors()) {
 			modelAndView.setViewName("home/login");
-			modelAndView.addObject("message", "Tài khoản hoặc mật khẩu không đúng");
+			return modelAndView;
+		} else if (userService.checkLogin(user) == true) {
+			return modelAndView;
+		} else {
+			modelAndView.setViewName("home/login");
+			modelAndView.addObject("message", "Tài khoản hoặc mật khẩu không đúng!");
 			return modelAndView;
 		}
+
 	}
 	@GetMapping("/register")
 	public ModelAndView registerView() {
@@ -43,24 +51,20 @@ public class HomeController {
 		return modelAndView;
 	}
 	@PostMapping("/register")
-	public ModelAndView register(@ModelAttribute("user") User user, @RequestParam String repassword ) {
+	public ModelAndView register(@Valid @ModelAttribute("user")  User user, BindingResult result,String repassword) {
 		
-		ModelAndView modelAndView = new ModelAndView("home/register");
+		ModelAndView modelAndView = new ModelAndView("redirect:/login");
 		modelAndView.addObject("user", new User());
-		if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || repassword.isEmpty()) {
-			modelAndView.addObject("message", "Vui lòng không để trống");
-			
-		}else {
-			if(user.getPassword().equals(repassword)) {
-				userService.register(user);
-				modelAndView.addObject("message", "Đăng kí thành công");
-			}else {
-				modelAndView.addObject("message", "Xác nhận mật khẩu không đúng !!!");
-			}
+		if (result.hasErrors()) {
+			return new ModelAndView("home/register");
+		} else if (user.getPassword().equals(repassword)) {
+			userService.register(user);
+			return modelAndView;
+		} else {
+			modelAndView.setViewName("home/register");
+			modelAndView.addObject("msg", "Mật khẩu nhập lại không khớp!");
+			return modelAndView;
 		}
-		
-		return modelAndView;
-		
 	}
 		
 		

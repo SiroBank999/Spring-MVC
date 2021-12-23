@@ -31,10 +31,21 @@ public class ProductRepositoryImpl implements ProductRepository {
 		Product product = products.get(id);
         return product;
 	}
-
+	
 	public void save(Product product) {
-		 products.put(product.getId(), product);
+		int id = findAll().size();
+		product.setId(id);
+		products.put(id + 1, product);
 		
 	}
 
+	public void removeById(int id) {
+		products.remove(id);
+		
+	}
+
+	public void update(Product product) {
+		products.replace(product.getId(), product);
+		
+	}
 }

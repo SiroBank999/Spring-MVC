@@ -15,8 +15,8 @@
 <body>
     <h1>REGISTER</h1>
     <p>
-      <c:if test="${message != null}">
-          <span class="message">${message}</span>
+      <c:if test="${msg != null}">
+          <span class="message">${msg}</span>
       </c:if>
     </p>
     <form:form action="register" method="post" modelAttribute="user">
@@ -26,14 +26,16 @@
                 <tr>
                     <td><form:label path="username">Username:</form:label></td>
                     <td><form:input path="username"/> </td>
+                    <td><form:errors path="username" cssClass="message" /></td>
                 </tr>
                 <tr>
                     <td><form:label path="password">Password:</form:label></td>
-                    <td><form:input path="password"/> </td>
+                    <td><form:password path="password"/> </td>
+                    <td><form:errors path="password" cssClass="message" /></td>
                 </tr>
                 <tr>
                     <td><label>Repassword:</label></td>
-                    <td><input type="text" name="repassword"></td>
+                    <td><input type="password" name="repassword"></td>
                 </tr>
                 <tr>
                     <td></td>

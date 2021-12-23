@@ -14,13 +14,17 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findAll() {
 		return this.productRepository.findAll();
 	}
-
 	public Product findById(int id) {
 		return this.productRepository.findById(id);
 	}
-
 	public void save(Product product) {
 		this.productRepository.save(product);
+	}
+	public void removeById(int id) {
+		this.productRepository.removeById(id);
+	}
+	public void update(Product product) {
+		this.productRepository.update(product);
 	}
 
 }

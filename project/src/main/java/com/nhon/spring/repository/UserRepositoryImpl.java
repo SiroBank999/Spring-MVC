@@ -11,8 +11,8 @@ public class UserRepositoryImpl implements UserRepository {
 	private static final Map<Integer, User> users;
 	static {
 		users = new HashMap<Integer, User>();
-		users.put(1, new User("admin","123456"));
-		users.put(2, new User("staff","12345"));
+		users.put(1, new User("admin1","123456"));
+		users.put(2, new User("staff1","12345"));
 	}
 	public User findUserById(int id) {
 		User user = users.get(id);

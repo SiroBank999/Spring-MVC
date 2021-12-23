@@ -1,5 +1,6 @@
 package com.nhon.spring.models;
 
+import javax.validation.constraints.NotEmpty;
 
 public class Product {
 	private int id;
@@ -28,6 +29,7 @@ public class Product {
 		this.price = price;
 	}
 	private String code;
+	//@NotEmpty(message = "Tên không được bỏ trống")
     private String name;
     private float price;
 	

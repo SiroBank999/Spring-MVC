@@ -18,9 +18,13 @@
         </tr>
         <c:forEach var="product" items="${products}">
             <tr>
-                <td>${product.getId()}</td>
+                <td>${product.getCode()}</td>
                 <td><a href="view?id=${product.getId()}"> ${product.getName()}</a></td>
                 <td>${product.getPrice()}</td>
+                <td>
+                	<a href="update?id=${product.getId()}">Update</a>
+                	<a href="remove?id=${product.getId()}">Remove</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
